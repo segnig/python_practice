@@ -5,10 +5,15 @@ Created on Tue Mar 26 13:30:30 2024
 @author: segni
 """
 
+
 class Food(object):
-    def __init__(self, name, value, weight):
+    """
+    Food class provides information about a particular food item
+    name, value, and calories 
+    """
+    def __init__(self, name, value, calories):
         self.name = name
-        self.calories = weight
+        self.calories = calories
         self.value = value
         
     def getValue(self):
@@ -80,11 +85,12 @@ def testGreedys(foods, maxUnits):
     print("Use greedy by density to allocate", maxUnits, "calories")
     
     testGreedy(foods, maxUnits, Food.density)
-        
-names = ["wine", "beer", "pizza", "burger", "fries",
-         "cola", "apple", "donut", "cake"]
-values = [89, 90, 95, 100, 90, 79, 50, 10]
-calories = [123, 154, 258, 354, 365, 150, 95, 195]
-foods = buildMenu(names, values, calories)
 
-testGreedys(foods, 750)
+if __name__ == "__main__":      
+    names = ["wine", "beer", "pizza", "burger", "fries",
+            "cola", "apple", "donut", "cake"]
+    values = [89, 90, 95, 100, 90, 79, 50, 10]
+    calories = [123, 154, 258, 354, 365, 150, 95, 195]
+    foods = buildMenu(names, values, calories)
+
+    testGreedys(foods, 750)
