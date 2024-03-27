@@ -35,8 +35,8 @@ In this program, the knapsack represents a fixed calorie limit, and the items ar
 
 **Usage:**
 
-1. **Save the code:** Save the code as a Python file (e.g., `food_value_optimization.py`).
-2. **Run the program:** Execute the script from the command line using `python food_value_optimization.py`.
+1. **Save the code:** Save the code as a Python file (e.g., `greedy-knapsack.py`).
+2. **Run the program:** Execute the script from the command line using `python greedy-knapsack.py`.
 
 **Output:**
 
