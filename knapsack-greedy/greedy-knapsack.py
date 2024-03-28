@@ -44,7 +44,7 @@ def testGreedy(items, constraints, keyFunction):
     taken, val = greedy(items, constraints, keyFunction)
     
     print(f"Total vales of items taken = {val}")
-    for item in items:
+    for item in taken:
         print("    ", item)
     
 
@@ -88,14 +88,51 @@ def maxVal(toConsider, avail):
         
     return result
 
-def testMaxVal(foods, maxUnits, printItems=True):
+def fastMaxVal(toConsider, avail, memo={}):
+    """
+    Assume toCosider a list of items, avail a weight 
+    memo suppiled by recursive calls
+    Return  a tuple of the total value of a solution 
+    to the 0/1 knapsack problem and the items of that solution
+    """
+    if (len(toConsider), avail) in memo:
+        result = memo[(len(toConsider), avail)]
+        
+    elif toConsider == [] or avail == 0:
+        result = (0, ())
+    elif toConsider[0].getCost() > avail:
+        # explore right branch only 
+        result = fastMaxVal(toConsider[1:], avail, memo)
+        
+    else:
+        nextItem = toConsider[0]
+        # Explore left branch only
+        withVal, withToTake = fastMaxVal(toConsider[1:], avail - nextItem.getCost(), memo)
+        
+        withVal += nextItem.getValue()
+        # Explore left branch only
+        withoutVal, withoutToTake = fastMaxVal(toConsider[1:], avail, memo)
+        
+        # choose better branch only
+        if withVal > withoutVal:
+            result =(withVal, withoutToTake + (nextItem,))
+        else:
+            result = (withoutVal, withoutToTake)
+            
+    memo[(len(toConsider), avail)] = result
+        
+    return result
+
+def testMaxVal(foods, maxUnits, algorithm, printItems=True):
     print("Use search tree to allocate", maxUnits, "calories")
     
-    val, taken = maxVal(foods, maxUnits)
+    val, taken = algorithm(foods, maxUnits)
     print("Total value of items taken =", val)
     if printItems:
         for item in taken:
             print ("    ", item)
+   
+    
 
 if __name__ == "__main__":      
     names = ["wine", "beer", "pizza", "burger", "fries",
@@ -103,7 +140,8 @@ if __name__ == "__main__":
     values = [89, 90, 95, 100, 90, 79, 50, 10, 12]
     calories = [123, 154, 258, 354, 365, 150, 95, 195, 123]
     foods = buildMenu(names, values, calories)
+    testMaxVal(foods, 750, fastMaxVal)
     testGreedys(foods, 750)
-    print("************")
-    testMaxVal(foods, 750)
+    testMaxVal(foods, 750, maxVal)
+    
         
