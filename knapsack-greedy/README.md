@@ -30,8 +30,9 @@ In this program, the knapsack represents a fixed calorie limit, and the items ar
 - `greedy(items, maxCost, keyFunction)`: Implements a greedy algorithm that prioritizes items based on the `keyFunction` (value, inverse cost, or density) until the calorie constraint (`maxCost`) is reached. It returns the selected items and their total value.
 - `testGreedy(items, constraints, keyFunction)`: Tests the `greedy` function with specified items, constraint (calorie limit), and key function, printing the total value and details of selected items.
 - `testGreedys(foods, maxUnits)`: Runs the `testGreedy` function with different key functions (value, inverse cost, and density) for a given food menu and calorie limit.
-- `maxVal(toConsider, avail)`: Implements a dynamic programming solution for the 0/1 knapsack problem. It recursively explores all possible combinations of items and returns the combination with the maximum total value within the calorie constraint (`avail`).
-- `testMaxVal(foods, maxUnits, printItems=True)`: Tests the `maxVal` function with a food menu, calorie limit, and optional flag to print the details of selected items.
+- `maxVal(toConsider, avail)`: Implements a backtracking solution for the 0/1 knapsack problem. It recursively explores all possible combinations of items and returns the combination with the maximum total value within the calorie constraint (`avail`).
+- - `maxVal(toConsider, avail)`: Implements a dynamic programming solution for the 0/1 knapsack problem. It recursively explores all possible combinations of items and returns the combination with the maximum total value within the calorie constraint (`avail`).
+- `testMaxVal(foods, maxUnits, algorithm, printItems=True)`: Tests the `maxVal or fastMaxVal` based on the `algorithm` parameter function with a food menu, calorie limit, and optional flag to print the details of selected items.
 
 **Usage:**
 
